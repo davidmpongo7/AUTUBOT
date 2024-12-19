@@ -1,51 +1,30 @@
 const axios = require('axios');
 
 module.exports.config = {
-  name: 'ai',
-  version: '1.0.0',
-  role: 0,
-  hasPrefix: false,
-  aliases: ['gpt', 'openai'],
-  description: "An AI command powered by GPT-3.5",
-  usage: "ai [prompt]",
-  credits: 'Joshua Apostol',
-  cooldown: 3,
+		name: 'ai',
+		version: '1.0.0',
+		role: 0,
+		hasPrefix: false,
+		description: "An AI command powered by OpenAI",
+		usages: "",
+		credits: 'Developer',
+		cooldown: 5,
 };
 
 module.exports.run = async function({ api, event, args }) {
-  const input = args.join(' ');
+		if (!args[0]) {
+				api.sendMessage("Please provide a question or statement after 'hercai'. For example: hercai What is the capital of France?", event.threadID);
+				return;
+		}
 
-  if (!input) {
-    api.sendMessage(
-      "[ AI ]\n\nPlease provide a query after 'ai'. Example: 'ai What is AI?'",
-      event.threadID,
-      event.messageID
-    );
-    return;
-  }
+		const question = args.join(" ");
+		const apiUrl = `https://openai-rest-api.vercel.app/hercai?ask=${encodeURIComponent(question)}&model=v3`;
 
-  api.sendMessage(
-    "[ AI ]\n\nPlease wait...",
-    event.threadID,
-    (err, info) => {
-      if (err) return;
-
-      axios
-        .get(`https://nash-api.onrender.com/api/gpt3?query=${encodeURIComponent(input)}`)
-        .then(({ data }) => {
-          const response = data.response;
-
-          api.editMessage(
-            response,
-            info.messageID
-          );
-        })
-        .catch(() => {
-          api.editMessage(
-            "[ AI ]\n\nAn error occurred while processing your request.",
-            info.messageID
-          );
-        });
-    }
-  );
+		try {
+				const response = await axios.get(apiUrl);
+				api.sendMessage(response.data.reply, event.threadID);
+		} catch (error) {
+				console.error("Error fetching response from OpenAI API:", error);
+				api.sendMessage("An error occurred while processing your request. Please try again later.", event.threadID);
+		}
 };
