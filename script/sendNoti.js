@@ -25,7 +25,7 @@ module.exports.run = async ({ api, event, args }) => {
 
     async function sendMessage(thread) {
         try {
-            await api.sendMessage(`𝙉𝙊𝙏𝙄𝘾𝙀 𝙁𝙍𝙊𝙈 𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙀𝙍\n ----------------\n Developer Name: JOSHUA APOSTOL\n ---------------\n\n『𝗡𝗼𝘁𝗶𝗰𝗲』"${custom}"`, thread.threadID);
+            await api.sendMessage(`𝗠𝗲𝘀𝘀𝗮𝗴𝗲✰ 𝗱𝗲 𝗺𝗼𝗻 ✰ 𝗰𝗿𝗲𝗮𝘁𝗲𝘂𝗿\n ----------------\n \n ---------------\n\n『𝗡𝗼𝘁𝗶𝗰𝗲』"${custom}"`, thread.threadID);
             sentCount++;
         } catch (error) {
             console.error("Error sending a message:", error);
