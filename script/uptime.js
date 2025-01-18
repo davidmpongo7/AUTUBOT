@@ -42,7 +42,7 @@ module.exports.run = async ({ api, event }) => {
 		};
 
 		const timeStart = Date.now();
-		const returnResult = `NASHBOT has been working for ${hours} hour(s) ${minutes} minute(s) ${seconds} second(s).\n\n❖ Cpu usage: ${usage.cpu.toFixed(1)}%\n❖ RAM usage: ${byte2mb(usage.memory)}\n❖ Cores: ${os.cpus().length}\n❖ Ping: ${Date.now() - timeStart}ms\n❖ Operating System Platform: ${osInfo.platform}\n❖ System CPU Architecture: ${osInfo.architecture}`;
+		const returnResult = `DAVBOT est en ligne depuis 🌼👉${hours} hour(s) 📀${minutes} minute(s)🪙 ${seconds} second(s).\n\n❖ Cpu usage: ${usage.cpu.toFixed(1)}%\n❖ 📀RAM usage👉: ${byte2mb(usage.memory)}\n❖ Cores:🪙 ${os.cpus().length}\n❖ Ping: ${Date.now() -📀 timeStart}ms\n❖ Operating System Platform:🪙 ${osInfo.platform}\n❖ System CPU Architecture: 🌼${osInfo.architecture}`;
 
 		return api.sendMessage(returnResult, event.threadID, event.messageID);
 };
